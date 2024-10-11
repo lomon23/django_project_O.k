@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вгадай число</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Гра "Вгадай число"</h1>
+    <p>Задайте мінімальне та максимальне число для гри.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="min_number">Мінімальне число:</label>
+        <input type="number" id="min_number" name="min_number" required>
+
+        <label for="max_number">Максимальне число:</label>
+        <input type="number" id="max_number" name="max_number" required>
+
+        <button type="submit">Встановити межі</button>
+    </form>
+    {% if message %}
+        <p class="message">{{ message }}</p>
+    {% endif %}
+    {% if generated_number %}
+        <p class="message">Згенероване число: {{ generated_number }}</p>
+    {% endif %}
+    {% if min_number and max_number %}
+        <h2>Спробуйте вгадати число від {{ min_number }} до {{ max_number }}.</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="guess">Ваше число:</label>
+            <input type="number" id="guess" name="guess" required>
+            <button type="submit">Вгадати</button>
+        </form>
+    {% endif %}
+</body>
+</html>
