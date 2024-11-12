@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if object %}Редагувати{% else %}Створити{% endif %} пост</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+
+{% block content %}
+<h2>{% if object %}Редагувати{% else %}Створити{% endif %} пост</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">{% if object %}Зберегти{% else %}Додати{% endif %} пост</button>
+    <a href="{% url 'blog_app:posts' %}" class="btn btn-secondary">Повернутися до списку постів</a>
+</form>
+{% endblock %}
+</body>
+</html>

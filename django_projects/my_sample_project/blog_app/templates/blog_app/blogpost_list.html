@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+
+{% block content %}
+<h1>Blog Posts</h1>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'blog_app:create_post' %}" class="btn btn-primary">Додати новий пост</a>
+{% endif %}
+
+<ul>
+    {% for post in object_list %}
+        <li>
+            <a href="{% url 'blog_app:post_by_pk' post.pk %}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<div class="pagination">
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Попередня</a>
+        {% endif %}
+
+        <span>Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Наступна</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}
+</body>
+</html>
