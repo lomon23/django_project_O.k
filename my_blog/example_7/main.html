@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна сторінка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #faf4ef;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #8ba2f0;
+            padding: 20px;
+            color: white;
+        }
+        main {
+            margin-top: 50px;
+        }
+        footer {
+            background-color: #CFCFCF;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ласкаво просимо!</h1>
+    </header>
+    <main>
+        <p>Це ваша перша сторінка у Django 🚀</p>
+        <p>Успіхів у розробці!</p>
+
+        <h2>Приклади фільтрів</h2>
+        <ul>
+            <!-- default -->
+            <li>Default: {{ none_variable|default:"Значення за замовчуванням" }}</li>
+
+            <!-- default_if_none -->
+            <li>Default_if_none: {{ none_variable|default_if_none:"Тільки якщо None" }}</li>
+
+            <!-- dictsort -->
+            <li>
+                Dictsort:
+                <ul>
+                    {% for item in sample_dict|dictsort:"name" %}
+                        <li>{{ item.name }} - {{ item.value }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+            <!-- dictsortreversed -->
+            <li>
+                Dictsortreversed:
+                <ul>
+                    {% for item in sample_dict|dictsortreversed:"name" %}
+                        <li>{{ item.name }} - {{ item.value }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+            <!-- divisibleby -->
+            <li>
+                Divisibleby (чи 10 ділиться на 5):
+                {% if 10|divisibleby:5 %}
+                    Так
+                {% else %}
+                    Ні
+                {% endif %}
+            </li>
+        </ul>
+    </main>
+    <footer>
+        <p>Всі права захищені &copy; 2024</p>
+    </footer>
+</body>
+</html>
